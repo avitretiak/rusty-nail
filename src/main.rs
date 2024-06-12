@@ -1,8 +1,8 @@
-use std::path::{Path, PathBuf};
 use rfd::FileDialog;
-use slint::PlatformError;
-use std::sync::{Arc, Mutex};
 use rusty_nail::*;
+use slint::PlatformError;
+use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex};
 
 slint::include_modules!();
 
@@ -42,7 +42,11 @@ fn main() -> Result<(), PlatformError> {
             let ui_handle = ui_handle.clone();
             let dif_path = ui_handle.upgrade().unwrap().get_dif_file_path().to_string();
             let exe_path = ui_handle.upgrade().unwrap().get_exe_file_path().to_string();
-            match apply_patches_from_dif(Path::new(&dif_path), Path::new(&exe_path), log_clone.clone()) {
+            match apply_patches_from_dif(
+                Path::new(&dif_path),
+                Path::new(&exe_path),
+                log_clone.clone(),
+            ) {
                 Ok(_) => {
                     if let Some(handle) = ui_handle.upgrade() {
                         handle.set_log("File patched successfully!".into());
@@ -51,7 +55,9 @@ fn main() -> Result<(), PlatformError> {
                 Err(e) => {
                     if let Some(handle) = ui_handle.upgrade() {
                         let log_content = log_clone.lock().unwrap().clone();
-                        handle.set_log(format!("Failed to patch file: {}\n{}", e, log_content).into());
+                        handle.set_log(
+                            format!("Failed to patch file: {}\n{}", e, log_content).into(),
+                        );
                     }
                 }
             }
