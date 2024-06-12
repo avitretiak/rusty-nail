@@ -10,23 +10,48 @@ env:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [windows-latest, macos-latest, ubuntu-latest]
+        style: [all, default]
+        rust:
+          - stable
+        include:
+          - style: all
+            flags: '--all-features'
+          - style: default
+            flags: ''
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Check out
         uses: actions/checkout@v4
+      - run: rustup toolchain install stable --profile minimal
       - name: Set up cargo cache
-        uses: actions/cache@v4
-        continue-on-error: false
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/            
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+        uses: Swatinem/rust-cache@v2
       - name: Build
         run: cargo build --verbose
+
+  test:
+    strategy:
+      fail-fast: true
+      matrix:
+        platform: [windows-latest, macos-latest, ubuntu-latest]
+        style: [all, default]
+        rust:
+          - stable
+        include:
+          - style: all
+            flags: '--all-features'
+          - style: default
+            flags: ''
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: rustup toolchain install stable --profile minimal
+      - name: Set up cargo cache
+        uses: Swatinem/rust-cache@v2
       - name: Test
         run: cargo test --verbose
