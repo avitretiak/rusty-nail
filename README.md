@@ -15,7 +15,7 @@ Rusty-Nail is a Rust-based GUI tool for patching EXE files with DIF files. This 
 
 - [Rust](https://www.rust-lang.org/tools/install) (version 1.56 or later)
 
-### Installation
+### Building
 
 1. Clone the repository:
     ```sh
@@ -34,15 +34,11 @@ Rusty-Nail is a Rust-based GUI tool for patching EXE files with DIF files. This 
     ```
 
 ## Usage
-
 1. Open the Rusty-Nail application.
 2. Click on "Select DIF File" to choose the DIF file.
 3. Click on "Select EXE File" to choose the EXE file.
 4. Click on "Apply Patch" to apply the patches from the DIF file to the EXE file.
 5. View the logs to check the status of the patching process.
-
-## License
-This project is licensed under the MIT/Apache-2.0 License - see the LICENSE file for details.
 
 ## Contributing
 1. Fork the repository.
@@ -50,6 +46,3 @@ This project is licensed under the MIT/Apache-2.0 License - see the LICENSE file
 3. Commit your changes (git commit -am 'Add my feature').
 4. Push to the branch (git push origin feature/my-feature).
 5. Create a new Pull Request.
-
-## Acknowledgements
-Thanks to the Rust community for their amazing support and resources.
