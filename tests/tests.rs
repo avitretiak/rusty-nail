@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{Read, Seek, SeekFrom, Write};
 use std::path::Path;
 use std::sync::{Arc, Mutex};
-use offset_patcher::{parse_dif_file, apply_patches_from_dif};
+use rusty_nail::{parse_dif_file, apply_patches_from_dif};
 
 #[test]
 fn test_parse_dif_file() {

@@ -2,7 +2,7 @@ use std::path::{Path, PathBuf};
 use rfd::FileDialog;
 use slint::PlatformError;
 use std::sync::{Arc, Mutex};
-use offset_patcher::*;
+use rusty_nail::*;
 
 slint::include_modules!();
 
