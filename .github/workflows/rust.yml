@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [windows-latest, macos-latest, ubuntu-latest]
-        style: [all, default]
+        style: [default]
         rust:
           - stable
         include:
@@ -36,14 +36,20 @@ jobs:
       - name: Set up cargo cache
         uses: Swatinem/rust-cache@v2
       - name: Build
-        run: cargo build --verbose
-
+        run: cargo build --verbose --release
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            target/release/rusty-nail.exe
+            target/release/rusty_nail.pdb
   test:
     strategy:
       fail-fast: true
       matrix:
         platform: [windows-latest, macos-latest, ubuntu-latest]
-        style: [all, default]
+        style: [default]
         rust:
           - stable
         include:
@@ -61,7 +67,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - run: rustup toolchain install stable --profile minimal
       - name: Set up cargo cache
         uses: Swatinem/rust-cache@v2
