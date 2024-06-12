@@ -1,12 +1,19 @@
 name: Rust
 
 on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
   workflow_call:
     inputs:
       rust-version:
         type: string
         required: false
         default: nightly
+env:
+  CARGO_TERM_COLOR: always
 
 jobs:
   check:
