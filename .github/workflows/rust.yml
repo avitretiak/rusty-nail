@@ -2,14 +2,14 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-and-test:
+  build:
     strategy:
       fail-fast: false
       matrix:
@@ -19,9 +19,15 @@ jobs:
           - stable
         include:
           - style: all
-            flags: '--all-features'
+            flags: "--all-features"
           - style: default
-            flags: ''
+            flags: ""
+        exclude:
+          - platform: windows-latest
+            style: default
+          - platform: macos-latest
+            style: default
+
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Check out
@@ -42,9 +48,15 @@ jobs:
           - stable
         include:
           - style: all
-            flags: '--all-features'
+            flags: "--all-features"
           - style: default
-            flags: ''
+            flags: ""
+        exclude:
+          - platform: windows-latest
+            style: default
+          - platform: macos-latest
+            style: default
+
     runs-on: ${{ matrix.platform }}
 
     steps:
