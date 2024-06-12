@@ -1,0 +1,131 @@
+import { VerticalBox, Button, ScrollView, HorizontalBox} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    min-width: 600px;
+    min-height: 720px;
+    Rectangle {
+        VerticalBox {
+            spacing: 20px;
+            padding: 20px;
+            HorizontalBox {
+                alignment: center;
+                padding: 5px;
+                Text {
+                    text: @tr(".exe to patch:");
+                    vertical-alignment: center;
+                    padding: 5px;
+                    font-weight: 700;
+                    font-size: 20px;
+                }
+            }
+
+            HorizontalBox {
+                alignment: center;
+                spacing: 10px;
+                Rectangle {
+                    width: 90%;
+                    height: 40px;
+                    drop-shadow-color: #222;
+                    drop-shadow-blur: 1px;
+                    border-radius: 5px;
+                    TextInput {
+                        read_only: true;
+                        text <=> root.exe_file_path;
+                        padding: 2px;
+                        wrap: word-wrap;
+                        vertical-alignment: center;
+                        horizontal-alignment: center;
+                    }
+                }
+            }
+
+            HorizontalBox {
+                Button {
+                    text: @tr("📁⚙️ - Browse EXE ");
+                    clicked => {
+                        root.select_exe_file()
+                    }
+                }
+            }
+
+            HorizontalBox {
+                alignment: center;
+                padding: 5px;
+                Text {
+                    text: @tr(".dif to load:");
+                    vertical-alignment: center;
+                    padding: 5px;
+                    font-weight: 700;
+                    font-size: 20px;
+                }
+            }
+
+            HorizontalBox {
+                alignment: center;
+                spacing: 10px;
+                Rectangle {
+                    width: 90%;
+                    height: 40px;
+                    drop-shadow-color: #222;
+                    drop-shadow-blur: 1px;
+                    border-radius: 5px;
+                    TextInput {
+                        read_only: true;
+                        text <=> root.dif_file_path;
+                        padding: 2px;
+                        wrap: word-wrap;
+                        vertical-alignment: center;
+                        horizontal-alignment: center;
+                    }
+                }
+            }
+
+            HorizontalBox {
+                Button {
+                    text: @tr("📁📝 - Browse DIF");
+                    padding: 5px;
+                    clicked => {
+                        root.select_dif_file()
+                    }
+                }
+            }
+
+            HorizontalBox {
+                Button {
+                    text: @tr("🧪 - Apply Patch");
+                    padding: 5px;
+                    primary: true;
+                    clicked => {
+                        root.apply_patch()
+                    }
+                }
+            }
+
+            HorizontalBox {
+                height: 200px;
+                ScrollView {
+                    width: 100%;
+                    padding: 2px;
+                    Rectangle {
+                        background: #222;
+                        border-width: 1px;
+                        border-color: #444;
+                        Text {
+                            wrap: word-wrap;
+                            text <=> root.log;
+                            font-size: 14px;
+                            font-family: "monospace";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    callback select_dif_file();
+    callback select_exe_file();
+    callback apply_patch();
+    in-out property <string> dif_file_path;
+    in-out property <string> exe_file_path;
+    in-out property <string> log;
+}
