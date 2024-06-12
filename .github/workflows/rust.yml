@@ -27,6 +27,8 @@ jobs:
             style: default
           - platform: macos-latest
             style: default
+          - platform: ubuntu-latest
+            style: all
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -43,6 +45,7 @@ jobs:
           name: build-artifacts
           path: |
             target/release/rusty*
+            !target/release/*.d
   test:
     strategy:
       fail-fast: true
@@ -61,6 +64,8 @@ jobs:
             style: default
           - platform: macos-latest
             style: default
+          - platform: ubuntu-latest
+            style: all
 
     runs-on: ${{ matrix.platform }}
 
