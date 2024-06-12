@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [windows-latest, macos-latest, ubuntu-latest]
-        style: [default]
+        style: [all, default]
         rust:
           - stable
         include:
@@ -42,14 +42,13 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            target/release/rusty-nail.exe
-            target/release/rusty_nail.pdb
+            target/release/rusty*
   test:
     strategy:
       fail-fast: true
       matrix:
         platform: [windows-latest, macos-latest, ubuntu-latest]
-        style: [default]
+        style: [all, default]
         rust:
           - stable
         include:
