@@ -47,6 +47,5 @@ Rusty-Nail is a Rust-based GUI tool for patching EXE files with DIF files. This 
 4. Push to the branch (git push origin feature/my-feature).
 5. Create a new Pull Request.
 
-
 ## Screenshots
-![image](https://github.com/avitretiak/rusty-nail/assets/24854974/ddcf6304-c9dd-49ef-a86e-027cf1dc2793)
+<img src="https://github.com/avitretiak/rusty-nail/assets/24854974/ddcf6304-c9dd-49ef-a86e-027cf1dc2793" width="480" align="center">
